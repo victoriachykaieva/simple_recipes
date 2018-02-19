@@ -25,7 +25,7 @@ export class AppComponent implements OnDestroy{
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  setCurrRecipe(recipe) {
+  onSelectRecipe(recipe) {
     this.currRecipe = recipe;
   }
 

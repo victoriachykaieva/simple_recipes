@@ -1,0 +1,7 @@
+<a *ngIf="recipe.title.toLowerCase().includes(nameFilter.toLowerCase())"
+   mat-list-item 
+  (click)="selectRecipe(recipe)"> 
+  <img src="{{recipe.photoUrl}}" alt="{{recipe.title}}" class="photo-thumbnail"
+    onError="this.src='assets/images/no-photo.png'"> 
+  <span [innerHTML]="recipe.title | highlight: nameFilter"></span>
+</a>

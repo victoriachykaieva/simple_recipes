@@ -13,19 +13,16 @@
         <mat-icon aria-label="Clear">highlight_off</mat-icon>
       </button>      
       <mat-nav-list class="nav-list">
-        <ng-container *ngFor="let recipe of recipes | async">
-          <a *ngIf="recipe.title.toLowerCase().includes(nameFilter.toLowerCase())" mat-list-item (click)="setCurrRecipe(recipe)"> 
-            <img src="{{recipe.photoUrl}}" alt="{{recipe.title}}" class="photo-thumbnail"
-              onError="this.src='assets/images/no-photo.png'"> 
-            <span [innerHTML]="recipe.title | highlight: nameFilter"></span>
-          </a>
-        </ng-container>
+        <app-recipe-item 
+          *ngFor="let recipe of recipes | async" 
+          [recipe]='recipe'
+          [nameFilter]='nameFilter'
+          (onSelectRecipe)='onSelectRecipe(recipe)'>
+        </app-recipe-item>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="content">
-      <ng-container>
-          <app-recipes-content [currRecipe]='currRecipe'></app-recipes-content>     
-      </ng-container>
+      <app-recipes-content [currRecipe]='currRecipe'></app-recipes-content>     
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

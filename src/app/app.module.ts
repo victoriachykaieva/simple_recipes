@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { AppMaterialModule } from './app-material.module';
 import { HighlightPipe } from './highlight.pipe';
 import { RecipesContentComponent } from './recipes-content/recipes-content.component';
+import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HighlightPipe,
-    RecipesContentComponent
+    RecipesContentComponent,
+    RecipeItemComponent
   ],
   imports: [
     BrowserModule,
