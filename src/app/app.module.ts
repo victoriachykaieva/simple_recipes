@@ -9,6 +9,7 @@ import { AppMaterialModule } from './app-material.module';
 import { HighlightPipe } from './highlight.pipe';
 import { RecipesContentComponent } from './recipes-content/recipes-content.component';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
     AppComponent,
     HighlightPipe,
     RecipesContentComponent,
-    RecipeItemComponent
+    RecipeItemComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

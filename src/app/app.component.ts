@@ -29,6 +29,10 @@ export class AppComponent implements OnDestroy{
     this.currRecipe = recipe;
   }
 
+  onChangeNameFilter(filter) {
+    this.nameFilter = filter;
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
