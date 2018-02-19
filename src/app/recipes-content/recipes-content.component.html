@@ -1,0 +1,5 @@
+<h1>{{currRecipe.title}}</h1>
+<div class="photo-container">
+  <img src={{currRecipe?.photoUrl}} alt="{{currRecipe?.title}}" onError="this.src='assets/images/no-photo.png'">
+</div>  
+<p>{{currRecipe.description}}</p>      

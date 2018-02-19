@@ -30,23 +30,17 @@
     flex: 1 0 auto;
   }
 
+  .content {
+    padding: 0 20px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
   .nav-list {
       width: 250px;
   }
 
   .nav-list a {
       padding: 5px 0;
-  }
-
-  .content {
-      padding: 0 20px;
-      font-family: Roboto, "Helvetica Neue", sans-serif;
-  }
-  .photo-container {
-      width: 300px;
-  }
-  .photo-container img {
-      max-width: 100%;
   }
 
   .photo-thumbnail {

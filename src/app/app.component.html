@@ -22,14 +22,9 @@
         </ng-container>
       </mat-nav-list>
     </mat-sidenav>
-
     <mat-sidenav-content class="content">
       <ng-container>
-        <h1>{{currRecipe.title}}</h1>
-        <div class="photo-container">
-          <img src={{currRecipe?.photoUrl}} alt="{{currRecipe?.title}}" onError="this.src='assets/images/no-photo.png'">
-        </div>  
-        <p>{{currRecipe.description}}</p>      
+          <app-recipes-content [currRecipe]='currRecipe'></app-recipes-content>     
       </ng-container>
     </mat-sidenav-content>
   </mat-sidenav-container>

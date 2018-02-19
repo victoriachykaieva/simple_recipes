@@ -7,12 +7,14 @@ import { MediaMatcher} from '@angular/cdk/layout';
 import { AppComponent } from './app.component';
 import { AppMaterialModule } from './app-material.module';
 import { HighlightPipe } from './highlight.pipe';
+import { RecipesContentComponent } from './recipes-content/recipes-content.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HighlightPipe
+    HighlightPipe,
+    RecipesContentComponent
   ],
   imports: [
     BrowserModule,

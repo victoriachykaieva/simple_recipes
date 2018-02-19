@@ -1,0 +1,6 @@
+.photo-container {
+    width: 300px;
+}
+.photo-container img {
+    max-width: 100%;
+}
