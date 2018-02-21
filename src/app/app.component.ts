@@ -3,6 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { RecipesService } from './recipes.service';
 import { Recipe } from './recipe';
 
+import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,21 +20,39 @@ export class AppComponent implements OnDestroy{
   public nameFilter: string = '';
   constructor(
     private recipesService: RecipesService,
+    public dialog: MatDialog,
     changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher) {
       this.getRecipes();
-      //this.recipes = recipesService.recipes;
-      //this.recipes.subscribe(result => this.currRecipe = result[0]);
       this.mobileQuery = media.matchMedia('(max-width: 600px)');
       this._mobileQueryListener = () => changeDetectorRef.detectChanges();
       this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  getRecipes(){
+  getRecipes() {
     this.recipesService.getRecipes()
       .subscribe((recipes) => {
         this.recipes = recipes;
         this.currRecipe = recipes[0];
+      });
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(RecipeModalComponent, {
+      width: '320px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      result && this.addRecipe(result);
+    });
+  }
+
+  addRecipe(recipe) {
+    this.recipesService.addRecipe(recipe)
+      .subscribe((recipe: Recipe) => {
+        this.recipes.push(recipe);
+        this.getRecipes();
       });
   }
 

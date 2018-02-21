@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
 
@@ -22,6 +22,14 @@ export class RecipesService {
             .sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )
         ),
         catchError(this.handleError('getRecipes', []))
+      );
+  }
+
+  addRecipe(recipe) {
+    return this.http.post<Recipe>(this.recipesUrl, recipe)
+      .pipe(
+        tap( recipe => recipe ),
+        catchError(this.handleError('addRecipe', []))
       );
   }
 
