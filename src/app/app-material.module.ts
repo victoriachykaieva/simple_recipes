@@ -11,6 +11,8 @@ import {
     MatDialogModule,
     MatInputModule
 } from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     exports: [
@@ -22,7 +24,9 @@ import {
         MatButtonToggleModule,
         MatProgressSpinnerModule,
         MatDialogModule,
-        MatInputModule
+        MatInputModule,
+        MatSelectModule,
+        MatTooltipModule
     ]
 })
 export class AppMaterialModule {}

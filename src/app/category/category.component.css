@@ -1,0 +1,23 @@
+.photo-thumbnail {
+    border-radius: 40px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    margin: 4px 16px; 
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+}
+
+
+.mat-list-item {
+    padding: 5px 0;
+    height: 70px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
+
+.mat-list-item.active {
+    color: #673ab7;
+    border-style: dashed;
+    border-color: #ccc;
+}

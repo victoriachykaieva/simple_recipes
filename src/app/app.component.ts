@@ -1,7 +1,10 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { RecipesService } from './recipes.service';
-import { Recipe } from './recipe';
+import { Router } from '@angular/router';
+import { RecipesService } from './services/recipes.service';
+import { Recipe } from './models/recipe';
+import { CategoriesService } from './services/categories.service';
+import { Category } from './models/category';
 
 import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
@@ -10,37 +13,50 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [RecipesService]
+  providers: [CategoriesService]
 })
 export class AppComponent implements OnDestroy{
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   public recipes: Recipe[];
-  public currRecipe: Recipe;
+  public categories: Category[];
+  public currCategory: Category;
   public nameFilter: string = '';
   constructor(
     private recipesService: RecipesService,
+    private categoriesService: CategoriesService,
+    private router: Router,
     public dialog: MatDialog,
     changeDetectorRef: ChangeDetectorRef, 
     media: MediaMatcher) {
-      this.getRecipes();
+      this.getCategories();
       this.mobileQuery = media.matchMedia('(max-width: 600px)');
       this._mobileQueryListener = () => changeDetectorRef.detectChanges();
       this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  getRecipes() {
-    this.recipesService.getRecipes()
+  getRecipes(category) {
+    this.recipesService.getRecipes(category)
       .subscribe((recipes) => {
         this.recipes = recipes;
-        this.currRecipe = recipes[0];
       });
+  }
+
+  getCategories() {
+    this.categoriesService.getCategories()
+    .subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
+
+  onSelectCategory (category) {
+    this.currCategory = category;
   }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(RecipeModalComponent, {
       width: '320px',
-      data: {}
+      data: { categories: this.categories }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -51,13 +67,8 @@ export class AppComponent implements OnDestroy{
   addRecipe(recipe) {
     this.recipesService.addRecipe(recipe)
       .subscribe((recipe: Recipe) => {
-        this.recipes.push(recipe);
-        this.getRecipes();
+        this.getRecipes(recipe.categoryId);
       });
-  }
-
-  onSelectRecipe(recipe) {
-    this.currRecipe = recipe;
   }
 
   onChangeNameFilter(filter) {

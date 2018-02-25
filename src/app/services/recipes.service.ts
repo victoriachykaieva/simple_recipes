@@ -4,7 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
 
-import { Recipe } from './recipe';
+import { Recipe } from '../models/recipe';
 
 import 'rxjs/add/operator/map';
 
@@ -15,11 +15,20 @@ export class RecipesService {
 
   constructor(private http: HttpClient) { }
 
-  getRecipes() {
+  getRecipes(category) {
     return this.http.get<Recipe[]>(this.recipesUrl)
       .pipe(
-        map( recipes => recipes
-            .sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )
+        map( recipes => {
+          let rec = [];
+          if (category === 'all') {
+            rec = recipes;
+          } else {
+            rec = recipes.filter((recipe) => {
+              return recipe.categoryId.toLowerCase() === category.toLowerCase()
+            });
+          }
+          return rec.sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )
+        }   
         ),
         catchError(this.handleError('getRecipes', []))
       );

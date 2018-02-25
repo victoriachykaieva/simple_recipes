@@ -22,6 +22,7 @@ export class RecipeModalComponent implements OnInit {
   createForm() {
     this.recipeForm = this.fb.group({
       title: ['', Validators.required],
+      categoryId: ['', Validators.required],
       description: ['', Validators.required],
       photoUrl: ''
     });

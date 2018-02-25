@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,23 @@ import { RecipesContentComponent } from './recipes-content/recipes-content.compo
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { SearchComponent } from './search/search.component';
 import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
+import { CategoryComponent } from './category/category.component';
+import { RecipesService } from './services/recipes.service';
+
+const appRoutes: Routes = [
+  { path: '', redirectTo: '/all-recipes', pathMatch: 'full'},
+  { path: 'all-recipes', component: RecipesContentComponent, data: {category: 'all'} },
+  { path: 'breakfast', component: RecipesContentComponent, data: {category: 'breakfast'} },
+  { path: 'baking', component: RecipesContentComponent, data: {category: 'baking'} },
+  { path: 'desserts', component: RecipesContentComponent, data: {category: 'desserts'} },
+  { path: 'dinner', component: RecipesContentComponent, data: {category: 'dinner'} },
+  { path: 'drinks', component: RecipesContentComponent, data: {category: 'drinks'} },
+  { path: 'lunch', component: RecipesContentComponent, data: {category: 'lunch'} },
+  { path: 'salads', component: RecipesContentComponent, data: {category: 'salads'} },
+  { path: 'snacks', component: RecipesContentComponent, data: {category: 'snacks'} },
+  { path: 'soups', component: RecipesContentComponent, data: {category: 'soups'} },
+  { path: 'vegetarian', component: RecipesContentComponent, data: {category: 'vegetarian'} },
+];
 
 
 @NgModule({
@@ -21,7 +39,8 @@ import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
     RecipesContentComponent,
     RecipeItemComponent,
     SearchComponent,
-    RecipeModalComponent
+    RecipeModalComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +48,10 @@ import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [MediaMatcher],
+  providers: [MediaMatcher, RecipesService],
   entryComponents: [RecipeModalComponent],
   bootstrap: [AppComponent]
 })

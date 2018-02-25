@@ -1,5 +1,10 @@
-<h1>{{currRecipe.title}}</h1>
-<div class="photo-container">
-  <img src={{currRecipe?.photoUrl}} alt="{{currRecipe?.title}}" onError="this.src='assets/images/no-photo.png'">
-</div>  
-<p>{{currRecipe.description}}</p>      
+<router-outlet></router-outlet>
+<div *ngFor="let recipe of recipes" >
+  <div>
+    <h1>{{recipe.title}}</h1>
+    <div class="photo-container">
+      <img src={{recipe?.photoUrl}} alt="{{recipe?.title}}" onError="this.src='assets/images/no-photo.png'">
+    </div>  
+    <p>{{recipe.description}}</p>    
+  </div>  
+</div>

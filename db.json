@@ -1,22 +1,67 @@
 {
+  "categories": [
+    {
+      "name": "Breakfast",
+      "photoUrl": "assets/images/categories/breakfast.jpg"
+    },
+    {
+      "name": "Lunch",
+      "photoUrl": "assets/images/categories/lunch.jpg"
+    },
+    {
+      "name": "Dinner",
+      "photoUrl": "assets/images/categories/dinner.jpg"
+    },
+    {
+      "name": "Snacks",
+      "photoUrl": "assets/images/categories/snacks.jpg"
+    },
+    {
+      "name": "Soups",
+      "photoUrl": "assets/images/categories/soups.jpg"
+    },
+    {
+      "name": "Vegetarian",
+      "photoUrl": "assets/images/categories/vegetarian.jpg"
+    },
+    {
+      "name": "Salads",
+      "photoUrl": "assets/images/categories/salads.jpg"
+    },
+    {
+      "name": "Baking",
+      "photoUrl": "assets/images/categories/baking.jpg"
+    },
+    {
+      "name": "Desserts",
+      "photoUrl": "assets/images/categories/desserts.jpg"
+    },
+    {
+      "name": "Drinks",
+      "photoUrl": "assets/images/categories/drinks.jpg"
+    }
+  ],
   "recipes": [
     {
       "id": "1",
       "title": "Title 1",
       "description": "Description 1",
-      "photoUrl": "assets/images/no-photo.png"
+      "photoUrl": "assets/images/no-photo.png",
+      "categoryId": "Breakfast"
     },
     {
       "id": "2",
       "title": "Title 2",
       "description": "Description 2",
-      "photoUrl": "assets/images/no-photo.png"
+      "photoUrl": "assets/images/no-photo.png",
+      "categoryId": "Lunch"
     },
     {
       "title": "New recipe",
       "description": "New recipe Description",
       "photoUrl": "assets/images/Recipe_logo.jpeg",
-      "id": "6zDb2bz"
+      "id": "6zDb2bz",
+      "categoryId": "Dinner"
     }
   ]
 }
