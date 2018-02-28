@@ -6,8 +6,8 @@ import { Recipe } from './models/recipe';
 import { CategoriesService } from './services/categories.service';
 import { Category } from './models/category';
 
-import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { RecipeModalComponent } from './components/recipe-modal/recipe-modal.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,7 @@ export class AppComponent implements OnDestroy{
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   public recipes: Recipe[];
+  public options;
   public categories: Category[];
   public currCategory: Category;
   public nameFilter: string = '';
@@ -35,10 +36,10 @@ export class AppComponent implements OnDestroy{
       this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  getRecipes(category) {
-    this.recipesService.getRecipes(category)
+  getRecipes() {
+    this.recipesService.getRecipes(this.currCategory.name)
       .subscribe((recipes) => {
-        this.recipes = recipes;
+        this.options = { recipes };
       });
   }
 
@@ -51,6 +52,7 @@ export class AppComponent implements OnDestroy{
 
   onSelectCategory (category) {
     this.currCategory = category;
+    this.router.navigateByUrl(category.name);
   }
 
   openDialog(): void {
@@ -67,7 +69,7 @@ export class AppComponent implements OnDestroy{
   addRecipe(recipe) {
     this.recipesService.addRecipe(recipe)
       .subscribe((recipe: Recipe) => {
-        this.getRecipes(recipe.categoryId);
+        this.getRecipes();
       });
   }
 

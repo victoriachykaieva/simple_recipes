@@ -16,20 +16,13 @@ export class RecipesService {
   constructor(private http: HttpClient) { }
 
   getRecipes(category) {
-    return this.http.get<Recipe[]>(this.recipesUrl)
+    let params = {};
+    if (category !== 'all') {
+      params = {categoryId: category};
+    }
+    return this.http.get<Recipe[]>(this.recipesUrl, { params })
       .pipe(
-        map( recipes => {
-          let rec = [];
-          if (category === 'all') {
-            rec = recipes;
-          } else {
-            rec = recipes.filter((recipe) => {
-              return recipe.categoryId.toLowerCase() === category.toLowerCase()
-            });
-          }
-          return rec.sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )
-        }   
-        ),
+        map( recipes => recipes.sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )),
         catchError(this.handleError('getRecipes', []))
       );
   }
@@ -39,7 +32,15 @@ export class RecipesService {
       .pipe(
         tap( recipe => recipe ),
         catchError(this.handleError('addRecipe', []))
-      );
+      )
+  }
+
+  deleteRecipe(recipe) {
+    return this.http.delete<Recipe>(this.recipesUrl+recipe.id)
+    .pipe(
+      tap( resp => resp ),
+      catchError(this.handleError('deleteRecipe', []))
+    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

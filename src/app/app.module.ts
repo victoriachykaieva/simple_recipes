@@ -9,11 +9,11 @@ import { MediaMatcher} from '@angular/cdk/layout';
 import { AppComponent } from './app.component';
 import { AppMaterialModule } from './app-material.module';
 import { HighlightPipe } from './highlight.pipe';
-import { RecipesContentComponent } from './recipes-content/recipes-content.component';
-import { RecipeItemComponent } from './recipe-item/recipe-item.component';
-import { SearchComponent } from './search/search.component';
-import { RecipeModalComponent } from './recipe-modal/recipe-modal.component';
-import { CategoryComponent } from './category/category.component';
+import { RecipesContentComponent } from './components/recipes-content/recipes-content.component';
+import { RecipeItemComponent } from './components/recipe-item/recipe-item.component';
+import { SearchComponent } from './components/search/search.component';
+import { RecipeModalComponent } from './components/recipe-modal/recipe-modal.component';
+import { CategoryComponent } from './components/category/category.component';
 import { RecipesService } from './services/recipes.service';
 
 const appRoutes: Routes = [

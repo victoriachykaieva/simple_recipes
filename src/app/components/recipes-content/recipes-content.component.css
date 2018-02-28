@@ -1,0 +1,19 @@
+.photo-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.recipe-item {
+    width: 200px;
+    margin: 10px;
+    float: left;
+}
+
+.recipes-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction:  row;
+    justify-content:  space-around;
+    align-items: flex-start;
+}
