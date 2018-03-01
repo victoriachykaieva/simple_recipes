@@ -1,5 +1,5 @@
 <a *ngIf="category.name.toLowerCase().includes(nameFilter.toLowerCase())"
-   mat-list-item routerLinkActive="active"
+   mat-list-item routerLinkActive="active" routerLink='/{{category.name}}'
   (click)="selectCategory(category)">
   <img src="{{category.photoUrl}}" alt="{{category.name}}" class="photo-thumbnail"
   onError="this.src='assets/images/no-photo.png'"> 

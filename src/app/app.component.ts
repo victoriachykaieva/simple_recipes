@@ -52,8 +52,8 @@ export class AppComponent implements OnDestroy{
 
   onSelectCategory (category) {
     this.currCategory = category;
-    this.recipes = [];
-    this.router.navigateByUrl(category.name);
+    // this.recipes = [];
+    // this.router.navigateByUrl(category.name);
   }
 
   openDialog(): void {
