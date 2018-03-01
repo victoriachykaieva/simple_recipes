@@ -38,9 +38,9 @@ export class AppComponent implements OnDestroy{
 
   getRecipes() {
     this.recipesService.getRecipes(this.currCategory.name)
-      .subscribe((recipes) => {
-        this.recipes = recipes;
-      });
+      // .subscribe((recipes) => {
+      //   this.recipes = recipes;
+      // });
   }
 
   getCategories() {

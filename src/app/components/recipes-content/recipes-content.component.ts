@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RecipesService } from '../../services/recipes.service';
 import { Recipe } from '../../models/recipe';
 import {TruncatePipe} from '../../truncate.pipe';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-recipes-content',
@@ -11,6 +12,7 @@ import {TruncatePipe} from '../../truncate.pipe';
 })
 export class RecipesContentComponent implements OnInit {
   currentCategory: string;
+  private subscription: Subscription;
 
   @Input() recipes: Recipe[];
   
@@ -29,12 +31,16 @@ export class RecipesContentComponent implements OnInit {
     this.route
     .data
     .subscribe(data => this.getRecipes(data.category));
+    this.subscription = this.recipesService.observableRecipes
+      .subscribe(recipes => {
+        this.recipes = recipes;
+      });
   }
 
-  getRecipes(category) {
+  getRecipes(category) : void {
     this.currentCategory = category;
     this.recipesService.getRecipes(category)
-      .subscribe(recipes => this.recipes = recipes);
+     // .subscribe(recipes => this.recipes = recipes);
   }
 
   recipe;

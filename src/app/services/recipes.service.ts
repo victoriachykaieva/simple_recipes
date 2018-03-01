@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Recipe } from '../models/recipe';
 
@@ -10,10 +11,17 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RecipesService {
-  public recipes: Observable<Recipe[]>;
+  public recipes;
   private recipesUrl = 'http://localhost:3000/recipes/';
+  observableRecipes;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.observableRecipes= new BehaviorSubject<Recipe[]>(this.recipes);
+  }
+
+  eventChange() {
+    this.observableRecipes.next(this.recipes);
+  }
 
   getRecipes(category) {
     let params = {};
@@ -22,9 +30,15 @@ export class RecipesService {
     }
     return this.http.get<Recipe[]>(this.recipesUrl, { params })
       .pipe(
-        map( recipes => recipes.sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) )),
+        map( recipes => {
+          this.recipes = recipes.sort( (a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0) );
+          
+          //return recipes
+        }),
         catchError(this.handleError('getRecipes', []))
-      );
+      ).subscribe(recipes => {
+        this.eventChange();
+      });
   }
 
   getRecipe(id) {
