@@ -1,18 +1,18 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipesService } from '../../services/recipes.service';
 import { Recipe } from '../../models/recipe';
+import {TruncatePipe} from '../../truncate.pipe';
 
 @Component({
   selector: 'app-recipes-content',
   templateUrl: './recipes-content.component.html',
-  styleUrls: ['./recipes-content.component.css']
+  styleUrls: ['./recipes-content.component.css'],
 })
 export class RecipesContentComponent implements OnInit {
   currentCategory: string;
-  recipes: Recipe[] = [];
 
-  @Input() options;
+  @Input() recipes: Recipe[];
   
   constructor(
     private recipesService: RecipesService,
@@ -20,11 +20,12 @@ export class RecipesContentComponent implements OnInit {
     }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.recipes = changes.options.currentValue ? 
-    changes.options.currentValue.recipes : [];
+    this.recipes = changes.recipes.currentValue ? 
+    changes.recipes.currentValue : [];
   }
 
   ngOnInit() {
+    this.recipes = [];
     this.route
     .data
     .subscribe(data => this.getRecipes(data.category));
@@ -42,5 +43,10 @@ export class RecipesContentComponent implements OnInit {
     .subscribe(() => {
       this.getRecipes(this.currentCategory);
     });
+  }
+
+  ngOnDestroy() {
+    console.log(this);
+    this.recipes = [];
   }
 }

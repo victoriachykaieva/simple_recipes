@@ -39,7 +39,7 @@ export class AppComponent implements OnDestroy{
   getRecipes() {
     this.recipesService.getRecipes(this.currCategory.name)
       .subscribe((recipes) => {
-        this.options = { recipes };
+        this.recipes = recipes;
       });
   }
 
@@ -52,6 +52,7 @@ export class AppComponent implements OnDestroy{
 
   onSelectCategory (category) {
     this.currCategory = category;
+    this.recipes = [];
     this.router.navigateByUrl(category.name);
   }
 

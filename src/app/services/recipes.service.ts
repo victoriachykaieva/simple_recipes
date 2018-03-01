@@ -27,6 +27,14 @@ export class RecipesService {
       );
   }
 
+  getRecipe(id) {
+    return this.http.get<Recipe[]>(this.recipesUrl, { params: { id } })
+      .pipe(
+        map( recipes => recipes),
+        catchError(this.handleError('getRecipe', []))
+      );
+  }
+
   addRecipe(recipe) {
     return this.http.post<Recipe>(this.recipesUrl, recipe)
       .pipe(

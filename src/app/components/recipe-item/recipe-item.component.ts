@@ -1,5 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Recipe } from '../../models/recipe';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
+import { RecipesService } from '../../services/recipes.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -9,16 +12,19 @@ import { Recipe } from '../../models/recipe';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe;
-  @Input() nameFilter;
-  @Output() onSelectRecipe = new EventEmitter<Recipe>();
+  
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private service: RecipesService) { }
+
 
   ngOnInit() {
-  }
-
-  selectRecipe(recipe) {
-    this.onSelectRecipe.emit(recipe);
+    let id = this.route.snapshot.paramMap.get('id');
+    this.service.getRecipe(id)
+      .subscribe((recipe) => {
+        this.recipe = recipe[0];
+      });
   }
 
 }

@@ -1,4 +1,4 @@
-<router-outlet></router-outlet>
+
 <!-- <div class="recipes-wrapper">
   <div *ngFor="let recipe of recipes" class="recipe-item">
       <h1>{{recipe.title}}</h1>
@@ -16,11 +16,11 @@
     <img mat-card-image src={{recipe?.photoUrl}} alt="{{recipe?.title}}" onError="this.src='assets/images/no-photo.png'">
   <mat-card-content>
     <p>
-      {{recipe.description}}
+      {{recipe.description | truncate : 20}}
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <a mat-raised-button routerLink=".">Read more</a>
+    <a mat-raised-button routerLink="{{recipe.id}}">Read more</a>
     <button mat-icon-button>
       <mat-icon aria-label="Edit">edit</mat-icon>
     </button>
